@@ -27,9 +27,15 @@ if __name__ == "__main__":
         "https://www.jython.org",
         "http://olympus.realpython.org/dice",
     ] * 80
-    for worker in range(15,30,2):
-        start_time = time.time()
-        download_all_sites(sites,worker)
-        duration = time.time() - start_time
-        print(f"downloaded {len(sites)} in {duration} seconds with {worker} workers")
+    loops = 10
+    workers = {}
+    for worker in range(15,21,1):
+        workers[worker] = []
+        for loop in range(loops):
+            start_time = time.time()
+            download_all_sites(sites,worker)
+            duration = time.time() - start_time
+            workers[worker].append(duration)
+        print(f"downloaded {len(sites)} in an average {sum(workers[worker])/len(workers[worker]):.2f} seconds with {worker} workers over {loops} loops")
 
+print(workers)
