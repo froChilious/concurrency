@@ -3,11 +3,11 @@ import multiprocessing
 import time
 
 session = None
-
+session = requests.Session()
 def set_global_session():
     global session
     if not session:
-        session = requests.Session()
+        session = requests.session()
 
 def download_site(url):
     with session.get(url) as response:
